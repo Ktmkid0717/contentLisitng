@@ -35,6 +35,7 @@ const List = () => {
             <img
               src="https://test.create.diagnal.com/images/Back.png"
               height={"20px"}
+              alt=""
             />
           </div>
           <div>
@@ -45,6 +46,7 @@ const List = () => {
           <img
             src="https://test.create.diagnal.com/images/search.png"
             height={"20px"}
+            alt=""
           />
         </div>
       </div>
