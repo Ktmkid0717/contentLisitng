@@ -1,7 +1,9 @@
 @import url('https://fonts.google.com/specimen/Titillium+Web');
+
 .mainWrapper{
     background-color: #171717;
-    color: #FFFFFF
+    color: #FFFFFF;
+    font-family: 'Titillium Web', sans-serif;
 }
 .headerWrapper{
     display: flex;
@@ -23,6 +25,7 @@
     align-items: center;
     gap: 15px;
     height: 50px;
+    font-size: 13px;
 }
 @media (max-width: 767px) {
     .ListingWrapper{

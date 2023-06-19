@@ -5,27 +5,50 @@ import MovieListing from "./movieListing";
 const List = () => {
   const [images, setImages] = useState([]);
   const [titleName, settitleName] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    // Simulating API call and setting the response in the state
-    const fetchImages = async () => {
-      try {
-        const response = await fetch(
-          "https://test.create.diagnal.com/data/page1.json"
-        );
-        const data = await response.json();
-
-        console.log(data.page["content-items"].content);
-
-        setImages(data.page["content-items"].content);
-        settitleName(data?.page?.title);
-      } catch (error) {
-        console.error("Error fetching images:", error);
-      }
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
     };
-
-    fetchImages();
-  }, []);
+     // eslint-disable-next-line
+  },[]);
+  const handleScroll = () => {
+    const { scrollY } = window;
+    const { scrollHeight } = document.documentElement;
+    
+    if (scrollY + window.innerHeight >= scrollHeight) {
+      // Scrolled to the end of the page
+      // Trigger your API call here
+      if(page < 4 ) {
+        setPage((page)=>page+1)
+      }
+      
+      console.log('log',page);
+    }
+  };
+  useEffect(() => {
+    if(page < 4 ) {
+    fetchImages()
+    }
+     // eslint-disable-next-line
+  }, [page]);  
+  
+  const fetchImages = async () => {
+    console.log('fs');
+    try {
+      const response = await fetch(
+        `https://test.create.diagnal.com/data/page${page}.json`
+      );
+      const data = await response.json();
+      setImages((prevData) => [...prevData, ...data.page["content-items"].content]);
+      settitleName(data?.page?.title);
+    } catch (error) {
+      console.error("Error fetching images:", error);
+    }
+  };
+console.log(images);
 
   return (
     <div className="mainWrapper">
