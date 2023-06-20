@@ -39,4 +39,8 @@
         justify-content: space-evenly;
  
     }
+    .lazy-load-image-background > img{
+        height: 150px;
+        width: 140px;
+    }
   }
